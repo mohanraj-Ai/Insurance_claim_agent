@@ -1,0 +1,103 @@
+Part,parts_cost,labour_cost
+Front Bumper,7500,3800
+Rear Bumper,7200,3500
+Hood,12000,5500
+Front Grille,4500,450
+Radiator,10000,950
+Radiator Support,8000,2500
+Radiator Support Structure,8500,2600
+Cooling Fan,3500,900
+Condenser,7000,1800
+AC Compressor,18000,4500
+Intercooler,9000,2200
+Engine,180000,25000
+Engine Mount,4500,1500
+Engine Bay Components,20000,7000
+Air Intake System,4500,1000
+Air Filter Box,1800,500
+Battery,7000,400
+Alternator,12000,1800
+Starter Motor,9000,1500
+Fuse Box,2500,500
+Left Headlight,5200,450
+Right Headlight,5200,450
+Left Headlight Assembly,5500,500
+Right Headlight Assembly,5500,500
+Left Fog Light,1800,350
+Right Fog Light,1800,350
+Left Tail Light,3200,400
+Right Tail Light,3200,400
+Windshield,9000,2500
+Rear Windshield,8500,2200
+Front Windshield Wiper,1200,250
+Rear Wiper,900,200
+Roof,35000,12000
+Sunroof Glass,28000,6000
+Left Fender,6000,3200
+Right Fender,6000,3200
+Left Front Fender,6000,3200
+Right Front Fender,6000,3200
+Left Front Door,18000,6000
+Right Front Door,18000,6000
+Left Rear Door,17000,5500
+Right Rear Door,17000,5500
+Left Side Mirror,4500,600
+Right Side Mirror,4500,600
+Mirror Glass,900,200
+Door Handle,1200,250
+Door Hinge,1500,450
+Window Regulator,3500,900
+Power Window Motor,4200,1200
+Front Bumper Reinforcement,6500,1800
+Rear Bumper Reinforcement,6200,1800
+Crash Bar,7000,2200
+Front Frame Rail,15000,7000
+Rear Frame Rail,14000,6500
+Cross Member,6500,2500
+Subframe,22000,8500
+Left Front Inner Structure,12000,5000
+Right Front Inner Structure,12000,5000
+Engine Under Cover,2500,600
+Skid Plate,3500,1000
+Bonnet Latch,1800,400
+Bonnet Hinge,1200,350
+Bonnet Insulation,900,250
+Front Suspension,18000,6000
+Rear Suspension,17000,5800
+Shock Absorber Front Left,4500,1200
+Shock Absorber Front Right,4500,1200
+Shock Absorber Rear Left,4200,1000
+Shock Absorber Rear Right,4200,1000
+Steering Rack,18000,4500
+Steering Column,12000,3000
+Tie Rod End,1800,500
+Control Arm Left,4200,1200
+Control Arm Right,4200,1200
+Wheel Hub,3800,1000
+Brake Disc Front Left,3500,700
+Brake Disc Front Right,3500,700
+Brake Disc Rear Left,3200,700
+Brake Disc Rear Right,3200,700
+Brake Caliper,6500,1200
+Brake Pads,2500,600
+ABS Sensor,1800,450
+Left Front Wheel,8000,700
+Right Front Wheel,8000,700
+Left Rear Wheel,7800,700
+Right Rear Wheel,7800,700
+Left Front Tire,6500,500
+Right Front Tire,6500,500
+Left Rear Tire,6200,500
+Right Rear Tire,6200,500
+Exhaust,12000,2500
+Catalytic Converter,25000,5000
+Silencer,7000,1500
+Fuel Tank,18000,3500
+Fuel Pump,9000,1800
+Fuel Injector,4500,800
+Trunk,15000,5000
+Tailgate,18000,6000
+Number Plate,800,100
+Rear Spoiler,4500,900
+Parking Sensor,2200,500
+Reverse Camera,3500,700
