@@ -77,7 +77,6 @@ Insurance_claim_agent/
 AI Engineer | Generative AI | AI Agents
 
 LinkedIn:
-(Add your LinkedIn URL)
-
+:https://www.linkedin.com/in/mohanraj-p-2bb994217/
 GitHub:
 https://github.com/mohanraj-Ai
