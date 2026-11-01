@@ -1,206 +1,114 @@
-# 🚗 Insurance Claim AI Agent
+# 🚗 AI-Powered Vehicle Insurance Claim Assessment System
 
-A Streamlit application for exploring vehicle-damage insurance claim
-analysis from an uploaded image.
+An intelligent multi-agent AI application that analyzes vehicle damage images, estimates repair costs, retrieves insurance policy information, and generates a claim assessment recommendation.
 
-The application passes the image to a backend workflow and displays
-damage observations, repair-cost estimates, policy analysis, and a
-generated claim recommendation.
+![Insurance Claim AI Agent](docs/generated-image.jpg)
 
-## Overview
+## 📌 Project Overview
 
-This project provides a single interface for reviewing the outputs of
-an insurance-claim analysis workflow.
+Vehicle insurance claim assessment involves multiple steps, including damage inspection, repair cost estimation, and policy verification.
 
-Users upload a damaged vehicle image and select Analyze Claim. The
-application invokes the backend workflow and presents its results in
-four sections:
+This project explores how **Generative AI and Multi-Agent Systems** can streamline this process through an automated AI-powered workflow.
 
-1. Vehicle damage analysis
-2. Repair-cost estimation
-3. Policy analysis
-4. Claim decision output
+Built using **LangGraph, Gemini 2.5 Flash, RAG, FAISS, and Streamlit**, the application processes uploaded vehicle damage images and generates structured claim assessment results.
 
-The interface integrates with a backend application imported from
-graph.graph.
+## ✨ Key Features
 
-## Features
+- 📷 **Vehicle Damage Detection:** Analyzes uploaded vehicle images and identifies visible damage.
+- 🔍 **Damage Severity Analysis:** Generates damage summaries and identifies affected vehicle parts.
+- 💰 **Repair Cost Estimation:** Estimates replacement parts, labour costs, and total repair expenses using parts data.
+- 📄 **Insurance Policy Analysis:** Retrieves relevant policy information using Retrieval-Augmented Generation (RAG).
+- 🤖 **Multi-Agent Collaboration:** Uses specialized AI agents to handle different stages of claim assessment.
+- ✅ **Claim Recommendation:** Combines analysis results to generate a structured claim assessment recommendation.
 
-### 📷 Vehicle Image Upload
+## 🏗️ Multi-Agent Architecture
 
-- Supports JPG, JPEG, and PNG files.
-- Displays a preview of the uploaded image.
-- Saves the uploaded file in a local temp directory for backend processing.
+The system uses LangGraph to coordinate specialized agents.
 
-### 🔍 Damage Analysis
+### 1. Vision Agent
+- Analyzes vehicle damage images.
+- Identifies damaged vehicle components.
+- Assesses damage severity.
+- Uses Gemini 2.5 Flash for image understanding.
 
-Displays the backend's assessment of:
+### 2. Cost Agent
+- Identifies replacement parts.
+- Retrieves pricing information from `parts.csv`.
+- Estimates parts and labour costs.
+- Calculates the total estimated repair cost.
 
-- Damage severity
-- Damage summary
-- Damaged vehicle parts
+### 3. Policy Agent
+- Retrieves relevant insurance policy information.
+- Uses Jina Embeddings for document embeddings.
+- Uses FAISS for vector similarity search.
+- Uses RAG to provide context-aware policy analysis from `policy.pdf`.
 
-### 💰 Repair-Cost Estimation
+### 4. Decision Agent
+- Combines outputs from the other agents.
+- Evaluates damage analysis, repair estimates, and policy information.
+- Generates a structured claim recommendation.
 
-Displays:
+## 🔄 Application Workflow
 
-- Replacement-parts table
-- Parts cost
-- Labour cost
-- Total estimated repair cost
+1. Upload a vehicle damage image.
+2. Submit the image for analysis through the Streamlit interface.
+3. The LangGraph workflow processes the request.
+4. The Vision Agent analyzes vehicle damage.
+5. The Cost Agent estimates repair expenses.
+6. The Policy Agent retrieves relevant insurance information.
+7. The Decision Agent combines the available results.
+8. The application displays the claim assessment output.
 
-Amounts are displayed in Indian rupees.
+## 🛠️ Technology Stack
 
-### 📄 Policy Analysis
+| Category | Technologies |
+|---|---|
+| Programming Language | Python |
+| LLM | Gemini 2.5 Flash |
+| Agent Orchestration | LangGraph |
+| Computer Vision | Gemini Vision |
+| Embeddings | Jina Embeddings |
+| Vector Database | FAISS |
+| RAG | Retrieval-Augmented Generation |
+| Frontend | Streamlit |
+| Data Processing | Pandas |
 
-Displays the policy-analysis response returned by the backend.
-
-The policy source, retrieval process, and coverage rules depend on the
-backend implementation and are not defined in the Streamlit interface.
-
-### ✅ Claim Decision Output
-
-Displays the backend-generated:
-
-- Claim status
-- Approved amount
-- Reason for the decision
-
-These outputs should be treated as prototype recommendations requiring
-review, not as an insurer's binding approval.
-
-## Application Workflow
-
-```text
-Upload Vehicle Image
-        ↓
-Preview Uploaded Image
-        ↓
-Save Image to Temporary Storage
-        ↓
-Select "Analyze Claim"
-        ↓
-Invoke Backend Workflow
-        ↓
-Display Damage Analysis
-        ↓
-Display Repair-Cost Estimate
-        ↓
-Display Policy Analysis
-        ↓
-Display Claim Recommendation
-```
-
-The display order does not establish the internal execution order of
-the backend workflow.
-
-## Technology Stack
-
-### Visible in the Application Code
-
-- Python
-- Streamlit
-- Pillow
-- Python os module
-- Custom backend workflow imported from graph.graph
-
-Additional model providers, orchestration libraries, retrieval tools,
-and API integrations depend on the backend implementation.
-
-## Backend Integration
-
-The Streamlit interface imports the backend application:
-
-```python
-from graph.graph import app
-```
-
-When the user selects Analyze Claim, the interface invokes it with:
-
-```python
-state = {
-    "image_path": image_path
-}
-
-result = app.invoke(state)
-```
-
-### Input Contract
-
-The backend receives a dictionary containing the saved image path:
-
-```python
-{
-    "image_path": "temp/uploaded_vehicle_image.jpg"
-}
-```
-
-### Expected Output Contract
-
-The interface expects the following structure:
-
-```python
-{
-    "vision_output": {
-        "severity": "...",
-        "damage_summary": "...",
-        "damaged_parts": [
-            "..."
-        ]
-    },
-    "cost_estimation": {
-        "replaced_parts": [
-            # Table-compatible replacement-part records
-        ],
-        "parts_cost": 0,
-        "labor_cost": 0,
-        "total_cost": 0
-    },
-    "policy_answer": "...",
-    "final_decision": {
-        "claim_status": "...",
-        "approved_amount": 0,
-        "reason": "..."
-    }
-}
-```
-
-The values above illustrate the required structure only. They are not
-actual analysis results.
-
-The backend must return compatible field names and value types for the
-interface to render successfully.
-
-## Suggested Project Structure
-
-Adapt this structure to match the actual repository:
+## 📂 Project Structure
 
 ```text
-Insurance_Claim_AI_Agent/
-├── app.py
+Insurance_claim_agent/
+│
+├── agents/
+│   ├── vision_agent.py
+│   ├── cost_agent.py
+│   ├── policy_agent.py
+│   └── decision_agent.py
+│
 ├── graph/
 │   └── graph.py
+│
+├── docs/
+│   └── generated-image.jpg
+│
+├── notebooks/
+├── temp/
+│
+├── app.py
 ├── requirements.txt
-├── README.md
-├── .gitignore
-└── temp/
+└── README.md
 ```
 
-- app.py: Streamlit interface.
-- graph/graph.py: Backend workflow exposing app.invoke().
-- requirements.txt: Frontend and backend dependencies.
-- temp/: Runtime storage for uploaded images; exclude from version control.
+*Note: Update the agent filenames above if your actual filenames differ.*
 
-Include any additional backend modules, configuration files, and policy
-resources required by your implementation.
+## ⚙️ Installation and Setup
 
-## Installation and Setup
+### 1. Clone the Repository
 
-### 1. Obtain the Project
+```bash
+git clone https://github.com/mohanraj-Ai/Insurance_claim_agent.git
 
-Clone or download the repository.
-
-Open a terminal in the project root.
+cd Insurance_claim_agent
+```
 
 ### 2. Create a Virtual Environment
 
@@ -208,137 +116,59 @@ Open a terminal in the project root.
 python -m venv .venv
 ```
 
-Activate it on Windows PowerShell:
-
-```powershell
-.\.venv\Scripts\Activate.ps1
-```
-
-Or on macOS/Linux:
+Activate on Windows:
 
 ```bash
-source .venv/bin/activate
+.venv\Scripts\activate
 ```
 
 ### 3. Install Dependencies
 
 ```bash
-python -m pip install -r requirements.txt
+pip install -r requirements.txt
 ```
 
-The interface directly requires:
+### 4. Configure API Credentials
 
-```text
-streamlit
-Pillow
-```
+Configure your Gemini API key and any other required credentials using environment variables or your local secrets configuration.
 
-The requirements file must also include all dependencies used by the
-backend workflow. These cannot be determined from the frontend code alone.
-
-Use versions verified in your working environment.
-
-### 4. Configure the Backend
-
-Ensure that:
-
-- graph.graph can be imported.
-- It exposes an app object with an invoke method.
-- Any required model credentials or services are configured.
-- Any required policy documents or pricing resources are available.
-- Backend results match the expected output contract.
-
-Keep credentials outside version control.
+Never upload API keys or credentials to GitHub.
 
 ### 5. Run the Application
 
 ```bash
-python -m streamlit run app.py
+streamlit run app.py
 ```
 
-Open the local address shown in the terminal.
+## 🎯 Project Objectives
 
-## How to Use
+- Explore practical applications of Agentic AI in the automotive industry.
+- Automate different stages of vehicle insurance claim assessment.
+- Combine computer vision, LLMs, and RAG in a single application.
+- Demonstrate collaborative AI agent workflows using LangGraph.
+- Apply Generative AI to real-world automotive insurance challenges.
 
-1. Open the Streamlit application.
-2. Upload a JPG, JPEG, or PNG image of a damaged vehicle.
-3. Review the image preview.
-4. Select Analyze Claim.
-5. Wait for the backend workflow to finish.
-6. Review the damage summary and listed parts.
-7. Inspect the estimated parts and labour costs.
-8. Read the policy-analysis response.
-9. Review the generated claim recommendation.
+## ⚠️ Disclaimer
 
-## Current Limitations
+This project is an experimental AI-based claim assessment prototype. Its outputs are recommendations for evaluation and should not be treated as official insurance approval or a substitute for professional vehicle inspection.
 
-- The interface accepts an image but does not collect policy details,
-  vehicle specifications, or claim documents through separate input fields.
-- Policy context and pricing data must therefore come from the backend,
-  if implemented.
-- A single image may not show hidden damage or all affected components.
-- No damage-detection accuracy or cost-estimation benchmark is established
-  by the interface code.
-- The interface assumes all expected backend fields are present.
-- Backend errors and malformed responses are not explicitly handled.
-- Uploaded files are saved using their original filenames, which can
-  cause collisions between uploads.
-- Temporary uploads are not automatically deleted.
-- Every claim-status value is currently displayed with a success-style
-  message, regardless of whether the outcome is approval or rejection.
+## 🚀 Future Enhancements
 
-## Privacy and Security
+- Support multiple vehicle damage images.
+- Improve repair cost estimation with real-world pricing data.
+- Add structured insurance claim document processing.
+- Introduce human review and approval workflows.
+- Improve evaluation of damage analysis and claim recommendations.
 
-Vehicle images may contain identifying information, such as registration
-plates, faces, or location details.
+## 👨‍💻 Author
 
-Before public deployment:
+**Mohanraj P**
 
-- Define how uploaded images are stored and deleted.
-- Use unique, server-generated filenames.
-- Validate uploaded file content and size.
-- Keep credentials and uploaded images out of the repository.
-- Review whether backend providers receive uploaded images.
-- Obtain appropriate consent for processing claim-related information.
-- Add access controls where required.
+Generative AI | AI/ML | Automotive AI
 
-## Suggested .gitignore
+- GitHub: https://github.com/mohanraj-Ai
+- LinkedIn: https://linkedin.com/in/mohanraj-p-2bb994217
 
-```gitignore
-# Virtual environments
-.venv/
-venv/
+---
 
-# Python cache
-__pycache__/
-*.py[cod]
-
-# Local secrets
-.env
-.env.*
-!.env.example
-.streamlit/secrets.toml
-
-# Uploaded images
-temp/
-
-# Notebook checkpoints
-.ipynb_checkpoints/
-
-# OS files
-.DS_Store
-Thumbs.db
-```
-
-## Future Improvements
-
-- Add policy-document upload and policy identification.
-- Collect vehicle make, model, year, and location.
-- Support multiple images per claim.
-- Validate backend responses before rendering.
-- Add exception handling and user-friendly error messages.
-- Use status-specific displays for approved, rejected, and review-required claims.
-- Add unique upload filenames and automatic cleanup.
-- Integrate documented repair-pricing sources.
-- Add human review before any final claim decision.
-- Evaluate damage analysis and cost estimates against reviewed examples.
+⭐ If you find this project interesting, feel free to explore the repository and share your feedback.
